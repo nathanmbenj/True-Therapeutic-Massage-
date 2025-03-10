@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>True Therapeutic Massage</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary-color: #8e44ad;
@@ -31,6 +32,8 @@
       font-family: 'Inter', sans-serif;
       line-height: 1.6;
       color: var(--text-color);
+      padding-top: 80px;
+      /* Add space for fixed navbar */
     }
 
     .container {
@@ -47,6 +50,16 @@
       background: var(--white);
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       z-index: 1000;
+      height: 80px;
+      display: flex;
+      align-items: center;
+    }
+
+    #navbar .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
     }
 
     .logo {
@@ -64,6 +77,7 @@
       text-decoration: none;
       color: var(--secondary-color);
       transition: var(--transition);
+      font-weight: 500;
     }
 
     .nav-links a:hover {
@@ -86,15 +100,17 @@
 
     /* Hero Section */
     .hero {
-      height: 100vh;
+      height: calc(100vh - 80px);
       background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-        url('https://unsplash.com/photos/purple-flower-in-tilt-shift-lens-qfZGhapxoa4');
+        url('https://images.unsplash.com/photo-1620553967899-7b24032a3b6b?auto=format&fit=crop&w=1920&q=80');
       background-size: cover;
       background-position: center;
       display: flex;
       align-items: center;
       text-align: center;
       color: var(--white);
+      margin-top: -80px;
+      /* Compensate for navbar padding */
     }
 
     .hero h1 {
@@ -296,6 +312,18 @@
         display: flex;
       }
 
+      .menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+
+      .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+      }
+
       .nav-links {
         display: none;
         flex-direction: column;
@@ -312,6 +340,10 @@
         display: flex;
       }
 
+      .nav-links li {
+        margin: 1rem 0;
+      }
+
       #navbar .container {
         display: flex;
         justify-content: space-between;
@@ -325,10 +357,12 @@
 
       .wellness-message {
         font-size: 1rem;
+        padding: 0 1rem;
       }
 
       .services-grid {
         grid-template-columns: 1fr;
+        padding: 0 1rem;
       }
 
       .footer-content {
@@ -465,6 +499,25 @@
   </footer>
 
   <script type="module" src="/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const menuToggle = document.getElementById('menuToggle');
+      const navLinks = document.querySelector('.nav-links');
+
+      menuToggle.addEventListener('click', function () {
+        navLinks.classList.toggle('active');
+        menuToggle.classList.toggle('active');
+      });
+
+      // Close menu when clicking a link
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+          navLinks.classList.remove('active');
+          menuToggle.classList.remove('active');
+        });
+      });
+    });
+  </script>
 </body>
 
 </html>
